@@ -10,7 +10,6 @@ $(document).keydown(function() {
   if ((level == 0) && (waitingForInput == false)) {
     increaseLevel();
     nextSequence();
-    waitingForInput = true;
   } else if ((level > 0) && (waitingForInput == true) && (gameOver == true))  {
     location.reload()
   }
@@ -18,27 +17,16 @@ $(document).keydown(function() {
 
 $(".btn").click(function() {
   buttonColourPressed = $(this).attr('id');
+  console.log(buttonColourPressed);
   if (waitingForInput == true) {
     if (level > 0) {
 
-      animateButton(buttonColourPressed);
+      animateButton($(this).attr('id'));
 
-      
-      if ((playerPattern.length + 1) < gamePattern.length) {
-        playerPattern.push(buttonColourPressed)
-        console.log("player pattern added");
-        console.log(playerPattern);
-        console.log(gamePattern);
-        checkAnswer();
 
-      } else if ((playerPattern.length + 1) == gamePattern.length) {
-        waitingForInput == false;
-        playerPattern.push(buttonColourPressed);
-        console.log("player pattern added + check answer");
-        console.log(playerPattern);
-        console.log(gamePattern);
-        checkAnswer();
-      }
+      playerPattern.push(buttonColourPressed)
+
+      checkAnswer(level);
     }
   }
 
@@ -51,31 +39,37 @@ function increaseLevel() {
   console.log(level);
 }
 
-function gameOver() {
-  level = 0;
+function gameIsOver() {
   gameOver = true;
   $("#level-title").text("Game Over! Press any key to play again.");
   console.log(level);
 }
 
-function checkAnswer() {
-  for (var i = 0; i < playerPattern.length; i++) {
+function checkAnswer(level) {
+  if (playerPattern[level] == gamePattern[level]) {
+    console.log("match");
+    console.log(playerPattern);
+    console.log(gamePattern);
 
-    if (playerPattern[i] == gamePattern[i]) {
-      console.log("match");
-      if (gamePattern.length == playerPattern.length) {
-        setTimeout(nextSequence, 500);
-      }
-    } else {
-      console.log("mismatch");
-      gameOver();
+    //is sequence finished?
+    if (playerPattern.length == gamePattern.length) {
+      console.log("sequence finished");
+      waitingForInput = false;
+      increaseLevel();
+      setTimeout(nextSequence, 1000);
+
     }
+  } else {
+    console.log("mismatch");
+    console.log(playerPattern);
+    console.log(gamePattern);
+    gameIsOver();
+    waitingForInput = false;
   }
 }
 
 function animateButton(buttonColour) {
-  var button = $(".btn").filter(buttonColour);
-  console.log(button);
+  var button = $("#" + buttonColour);
   // Animate button
   $(button).addClass("pressed");
   setTimeout(function() {
@@ -93,10 +87,10 @@ function nextSequence() {
   var randomNumber = Math.floor(Math.random() * 4);
   var randomChosenColour = buttonColours[randomNumber];
 
-
   //Add to nextSequence
   gamePattern.push(randomChosenColour);
   console.log(gamePattern);
 
   animateButton(randomChosenColour);
+  waitingForInput = true;
 }
