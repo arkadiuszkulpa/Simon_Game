@@ -10,7 +10,7 @@ $(document).keydown(function() {
   if ((level == 0) && (waitingForInput == false)) {
     increaseLevel();
     nextSequence();
-  } else if ((level > 0) && (waitingForInput == true) && (gameOver == true))  {
+  } else if (gameOver == true)  {
     location.reload()
   }
 })
@@ -46,10 +46,8 @@ function gameIsOver() {
 }
 
 function checkAnswer(level) {
-  if (playerPattern[level] == gamePattern[level]) {
+  if (playerPattern[playerPattern.length - 1] == gamePattern[playerPattern.length - 1]) {
     console.log("match");
-    console.log(playerPattern);
-    console.log(gamePattern);
 
     //is sequence finished?
     if (playerPattern.length == gamePattern.length) {
@@ -61,8 +59,6 @@ function checkAnswer(level) {
     }
   } else {
     console.log("mismatch");
-    console.log(playerPattern);
-    console.log(gamePattern);
     gameIsOver();
     waitingForInput = false;
   }
