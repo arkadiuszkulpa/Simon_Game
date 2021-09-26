@@ -6,29 +6,44 @@ var answerCheckPosition = 0;
 var waitingForInput = false;
 var gameOver = false;
 
-$(document).keydown(function() {
-  if ((level == 0) && (waitingForInput == false)) {
-    increaseLevel();
-    nextSequence();
-  } else if (gameOver == true)  {
-    location.reload()
-  }
-})
+// $(document).keydown(function() {
+//   if ((level == 0) && (waitingForInput == false)) {
+//     increaseLevel();
+//     nextSequence();
+//   } else if (gameOver == true)  {
+//     location.reload()
+//     $("#StartButton").text("Tap To Start");
+//   }
+// })
 
 $(".btn").click(function() {
-  buttonColourPressed = $(this).attr('id');
-  console.log(buttonColourPressed);
-  if (waitingForInput == true) {
-    if (level > 0) {
+  buttonPressed = $(this).attr('id');
+  console.log(buttonPressed);
 
-      animateButton($(this).attr('id'));
+  if (buttonPressed == "StartButton") {
+    if ((level == 0) && (waitingForInput == false)) {
+      increaseLevel();
+      nextSequence();
+      $(this).text("rules");
+    } else if (gameOver == true)  {
+      location.reload()
+    } else {
+      
+    }
+  } else {
+    if (waitingForInput == true) {
+      if (level > 0) {
+
+        animateButton($(this).attr('id'));
 
 
-      playerPattern.push(buttonColourPressed)
+        playerPattern.push(buttonPressed)
 
-      checkAnswer(level);
+        checkAnswer(level);
+      }
     }
   }
+
 
 
 });
@@ -41,7 +56,10 @@ function increaseLevel() {
 
 function gameIsOver() {
   gameOver = true;
-  $("#level-title").text("Game Over! Press any key to play again.");
+  $("#level-title").text("Game Over!");
+  $("#StartButton").text("Play Again?");
+  $("#StartButton").css("visibility", "visible");
+  $(this).css("position", "fixed");
   console.log(level);
 }
 

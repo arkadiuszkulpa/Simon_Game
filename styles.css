@@ -9,12 +9,28 @@ body {
   margin:  5%;
   color: #FEF2BF;
 }
+#StartButton {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2rem;
+  text-decoration: underline;
+  margin:  5%;
+  color: #FEF2BF;
+}
 
 .container {
   display: block;
   width: 50%;
   margin: auto;
 
+}
+
+@media (max-width: 767px) {
+  .container {
+    display: block;
+    width: 100%;
+    margin: auto;
+
+  }
 }
 
 .btn {
@@ -24,6 +40,10 @@ body {
   width: 200px;
   border: 10px solid black;
   border-radius: 20%;
+}
+
+.StartButton {
+  width: 300px;
 }
 
 .game-over {
