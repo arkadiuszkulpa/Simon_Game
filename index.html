@@ -10,8 +10,47 @@
 </head>
 
 <body>
-  <h1 id="level-title">Simon Says Game</h1>
-  <h1 id="StartButton" type="button" class="btn StartButton">Tap to Start</h1>
+  <h1 id="level-title" class="btn level-title">Simon Says: Tap Me!</h1>
+  <div class="container row">
+    <div class="col col-12">
+      <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Rules
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          1. At the start, Simon's game will randomly give you a signal ( one color will pop up).
+          <br><br>
+          2. You have to repeat the signal by pressing the same color.
+          <br><br>
+          3. Simon will duplicate the first signal and add a random one.
+          <br><br>
+          4. You need to repeat these two signals by pressing the same color lenses, in the order.
+          <br><br>
+          5. Simon will duplicate these first two signals and add one.
+          <br><br>
+          6. You need to repeat these three signals in the order.
+          <br><br>
+          7. Simon will repeat all three signals and add one.
+          <br><br>
+          8. Continue playing as long as you can repeat the sequence.
+          <br><br>
+          9. After the 5th, 9th and 13th signals in a sequence, Simon will automatically speed up. That means you need to add Skill levels.
+          <br><br>
+          10. If you fail to repeat a sequence exactly, or if you take more then 5 seconds to repeat a signal, Simon responds with a "REZZ" sound. That means you've lost, and the sequence of signals ends. GAME OVER.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+    </div>
+  </div>
+
+  </div>
   <div class="container">
     <div class="row">
       <div class="col col-6">
@@ -46,10 +85,14 @@
     </div>
 
   </div>
+
+  <!-- bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
   <!-- JQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- JS Script file -->
-<script src="game.js" charset="utf-8"></script>
+  <!-- JS Script file -->
+  <script src="game.js" charset="utf-8"></script>
 
 </body>
 

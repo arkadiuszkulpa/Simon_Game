@@ -16,19 +16,20 @@ var gameOver = false;
 //   }
 // })
 
+animateTitle(false);
+
 $(".btn").click(function() {
   buttonPressed = $(this).attr('id');
   console.log(buttonPressed);
 
-  if (buttonPressed == "StartButton") {
+  if (buttonPressed == "level-title") {
     if ((level == 0) && (waitingForInput == false)) {
       increaseLevel();
       nextSequence();
-      $(this).text("rules");
     } else if (gameOver == true)  {
       location.reload()
     } else {
-      
+
     }
   } else {
     if (waitingForInput == true) {
@@ -54,12 +55,22 @@ function increaseLevel() {
   console.log(level);
 }
 
+function animateTitle(gameOver) {
+  if (gameOver == true) {
+    console.log("play-again and game over");
+    $('#level-title').delay(2000).fadeOut(500, function() {
+        $(this).text('Tap to Restart!').fadeIn(500);
+    });
+  } else {
+    console.log("title and start game");
+  }
+}
+
 function gameIsOver() {
   gameOver = true;
   $("#level-title").text("Game Over!");
-  $("#StartButton").text("Play Again?");
-  $("#StartButton").css("visibility", "visible");
-  $(this).css("position", "fixed");
+  animateTitle(true);
+
   console.log(level);
 }
 
